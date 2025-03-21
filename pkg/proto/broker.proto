@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = "github.com/igeon510/new-wowsan/pkg/proto;proto";
+
+service BrokerService {
+    rpc AddBroker(AddBrokerRequest) returns (AddBrokerResponse);
+    rpc SendSubscription(SendSubscriptionRequest) returns (SendSubscriptionResponse);
+    rpc SendUnsubscription(SendUnsubscriptionRequest) returns (SendUnsubscriptionResponse);
+    rpc SendPublication(SendPublicationRequest) returns (SendPublicationResponse);
+}
+
+message NodeInfo {
+    string id = 1;
+    string ip = 2;
+    string port = 3;
+}
+
+message AddBrokerRequest {
+    NodeInfo node = 1;
+}
+
+message AddBrokerResponse {
+    bool success = 1; // 성공 여부
+    string errorMessage = 2; // 실패 이유
+}
+
+message SendSubscriptionRequest {
+    NodeInfo node = 1;
+    string topic = 2;
+    string subscriptionId= 3 ; // 없으면 브로커에서 만듬
+}
+
+message SendSubscriptionResponse {
+    bool success = 1; 
+    string message = 2; 
+    string subscriptionId = 3; // 브로커에서 알려줌, 이를 통해 추후 unsub 요청
+}
+
+message SendUnsubscriptionRequest {
+    NodeInfo node = 1;
+    string subscriptionId = 2;
+}
+
+message SendUnsubscriptionResponse {
+    bool success = 1;
+    string errorMessage = 2;
+}
+
+message SendPublicationRequest {
+    NodeInfo node = 1;
+    string topic = 2;
+    string content = 3;
+    string publicationId = 4;
+}
+
+message SendPublicationResponse {
+    bool success = 1;
+    string errorMessage = 2;
+}
