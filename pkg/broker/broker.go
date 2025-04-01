@@ -4,7 +4,7 @@ import (
 	"log"
 	"sync"
 
-	"github.com/igeon510/new-wowsan/pkg/proto"
+	"github.com/HongikAPL/new-wowsan/pkg/proto"
 )
 
 type Subscription struct {

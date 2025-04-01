@@ -1,4 +1,4 @@
-module github.com/igeon510/new-wowsan
+module github.com/HongikAPL/new-wowsan
 
 go 1.24.1
 

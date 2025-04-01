@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/igeon510/new-wowsan/pkg/proto"
+	"github.com/HongikAPL/new-wowsan/pkg/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 )

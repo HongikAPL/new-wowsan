@@ -10,8 +10,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/igeon510/new-wowsan/pkg/broker"
-	"github.com/igeon510/new-wowsan/pkg/proto"
+	"github.com/HongikAPL/new-wowsan/pkg/broker"
+	"github.com/HongikAPL/new-wowsan/pkg/proto"
 )
 
 // 커맨드라인에서 addbroker만 대충 실험하기 위한 코드를 짰습니다.
@@ -90,7 +90,7 @@ func main() {
 			} else {
 				log.Println("Invalid command format. Use: add <ip> <port>")
 			}
-		} else if input == "peer" {
+		} else if input == "peer" { // peer 커맨드 입력시 peer 출력(연결된 브로커)
 			b.PrintPeers()
 		} else {
 			log.Println("Unknown command.")
