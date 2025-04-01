@@ -2,7 +2,8 @@ syntax = "proto3";
 
 package proto;
 
-option go_package = "github.com/igeon510/new-wowsan/pkg/proto;proto";
+option go_package = "pkg/proto;proto";
+
 
 service BrokerService {
     rpc AddBroker(AddBrokerRequest) returns (AddBrokerResponse);

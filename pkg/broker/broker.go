@@ -1,6 +1,7 @@
 package broker
 
 import (
+	"log"
 	"sync"
 
 	"github.com/igeon510/new-wowsan/pkg/proto"
@@ -12,27 +13,22 @@ type Subscription struct {
 }
 
 type Broker struct {
-	ID            string
-	IP            string
-	Port          string
+	NodeInfo      *proto.NodeInfo
 	Peers         map[string]*proto.NodeInfo
 	Subscriptions []Subscription
 	mu            sync.RWMutex
 }
 
-func NewBroker(id, ip, port string) *Broker {
+func NewBroker(nodeInfo *proto.NodeInfo) *Broker {
 	return &Broker{
-		ID:            id,
-		IP:            ip,
-		Port:          port,
+		NodeInfo:      nodeInfo,
 		Peers:         make(map[string]*proto.NodeInfo),
 		Subscriptions: []Subscription{},
 	}
 }
 
 func (b *Broker) AddBroker(node *proto.NodeInfo) {
-	b.mu.Lock()
-	defer b.mu.Unlock()
+
 	b.Peers[node.Id] = node
 }
 
@@ -74,5 +70,14 @@ func (b *Broker) SendPublication(node *proto.NodeInfo, topic string, content str
 				println("Sending message to", subscriber.Id, ":", content)
 			}(sub.Node)
 		}
+	}
+}
+
+// 피어 출력
+func (b *Broker) PrintPeers() {
+
+	log.Println("Current peers:")
+	for id, peer := range b.Peers {
+		log.Printf("Peer ID: %s, IP: %s, Port: %s", id, peer.Ip, peer.Port)
 	}
 }
